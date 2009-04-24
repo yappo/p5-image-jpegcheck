@@ -9,7 +9,8 @@ test_fh('t/foo.jpg', 1);
 test_fh('t/01_simple.t', 0);
 
 # check the not GLOB reference
-is is_jpeg({}), '0';
+eval{ is_jpeg({}) };
+like $@, qr/required is filehandle or filepath string/;
 
 sub test_fh {
     my ($fname, $expected) = @_;

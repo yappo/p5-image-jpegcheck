@@ -13,7 +13,7 @@ sub is_jpeg {
         if (ref $file eq 'GLOB') {
             return Image::JpegCheck::_is_jpeg($file);
         } else {
-            return 0;
+            die 'required is filehandle or filepath string';
         }
     } else {
         open my $fh, '<', $file or die $!;
