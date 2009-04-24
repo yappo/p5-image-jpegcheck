@@ -10,7 +10,11 @@ our @EXPORT = ('is_jpeg');
 sub is_jpeg {
     my ($file, ) = @_;
     if (ref $file) {
-        return Image::JpegCheck::_is_jpeg($file);
+        if (ref $file eq 'GLOB') {
+            return Image::JpegCheck::_is_jpeg($file);
+        } else {
+            return 0;
+        }
     } else {
         open my $fh, '<', $file or die $!;
         binmode $fh;
